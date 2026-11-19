@@ -1,0 +1,33 @@
+{
+  "name": "@pipeworx/mcp-mospi-in",
+  "version": "0.1.0",
+  "description": "India MoSPI (Ministry of Statistics and Programme Implementation) MCP — the Index of Industrial Production (IIP, monthly) and the Wholesale Price Index (WPI, monthly) from the eSankhyiki data service.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools.json": "./tools.json",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "mcp-mospi-in": "bin/cli.js"
+  },
+  "files": ["bin/", "lib/", "tools.json", "server.json"],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "mospi-in"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipeworx-io/mcp-mospi-in.git"
+  },
+  "mcpName": "io.github.pipeworx-io/mospi-in",
+  "pipeworx": {
+    "mode": "gateway",
+    "slug": "mospi-in",
+    "gatewaySlug": "mospi-in",
+    "sourceHash": "v1-f32ad5ef9fec1e066325867f2da610e9da28264f845e85309036039f45fcfe3e",
+    "sourceCommit": "afcaf44429ea5fe1396ff1733e1b8651aeefcde8"
+  }
+}

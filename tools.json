@@ -1,0 +1,94 @@
+[
+  {
+    "name": "mospi_in_options",
+    "description": "What India's Ministry of Statistics (MoSPI) publishes for the Index of Industrial Production (iip) and the Wholesale Price Index (wpi): the base years available (newest first), and for one base year the years, the series you can ask for (IIP: General, sectoral and use-based categories; WPI: major groups and groups) and the LATEST month that has data. Start here to learn the latest period and the exact series names for mospi_in_get_data. India only.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "type": "string",
+          "enum": [
+            "iip",
+            "wpi"
+          ],
+          "description": "\"iip\" = Index of Industrial Production, \"wpi\" = Wholesale Price Index."
+        },
+        "base_year": {
+          "type": "string",
+          "description": "Base year such as \"2022-23\" or \"2011-12\". Default: the newest base."
+        }
+      },
+      "required": [
+        "product"
+      ]
+    }
+  },
+  {
+    "name": "mospi_in_search_series",
+    "description": "Find an Indian wholesale-price series (a commodity, item, group or sub-group such as \"wheat\", \"mineral oils\", \"pulses\") or an industrial-production category (\"capital goods\", \"manufacturing\", \"electricity\") by words in its name. Returns the series label and level; pass the label to mospi_in_get_data as `series`. Newest base year unless base_year is given. India only.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Words from the series name, e.g. \"wheat\", \"mineral oils\", \"capital goods\"."
+        },
+        "product": {
+          "type": "string",
+          "enum": [
+            "iip",
+            "wpi"
+          ],
+          "description": "Restrict to one product. Default searches both."
+        },
+        "base_year": {
+          "type": "string",
+          "description": "Base year; default newest for each product."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Max results (default 15, max 50)."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    }
+  },
+  {
+    "name": "mospi_in_get_data",
+    "description": "Get India's Index of Industrial Production (iip) or Wholesale Price Index (wpi) for a month, a year, or the latest month. Returns index values (and IIP year-on-year growth rate) with base year, period and series labels. `series` names what to read: IIP \"General\" (default), \"Sectoral\", \"Use-based category\" or a category such as \"Manufacturing\" (which returns its sub-categories); WPI an all-commodities index (default), a group, sub-group or item such as \"Wheat\". Omit year and month for the latest month that has data. Uses the newest base year unless base_year is given; index levels from different base years are not comparable. India only.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "product": {
+          "type": "string",
+          "enum": [
+            "iip",
+            "wpi"
+          ],
+          "description": "\"iip\" or \"wpi\"."
+        },
+        "series": {
+          "type": "string",
+          "description": "Series name or code from mospi_in_options / mospi_in_search_series. Default: the overall index (IIP General, WPI all commodities)."
+        },
+        "year": {
+          "type": "integer",
+          "description": "Calendar year, e.g. 2026. Omit (with month) for the latest month."
+        },
+        "month": {
+          "type": "string",
+          "description": "Month number 1-12, a month name, or \"all\". With a year and no month, all months of that year are returned."
+        },
+        "base_year": {
+          "type": "string",
+          "description": "Base year, e.g. \"2022-23\". Default: newest."
+        }
+      },
+      "required": [
+        "product"
+      ]
+    }
+  }
+]
